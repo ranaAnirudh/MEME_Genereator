@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 // import ShareIcon from '@mui/icons-material/Share';
 import '../App.css'
+import {saveAs} from 'file-saver'
 function Meme({meme,setMeme,setUrl}) {
     const [error,setError]=useState(null)
+    const [uri,setUri]=useState(null)
+
     const [form,setForm]=useState({
         template_id:meme.id,
         username:"AnirudhRana1",
         password:"Qwerty@123",
         boxes:[],
     })
-    
+
+    const downloadImage = () => {
+        saveAs(uri, 'image.jpg') // Put your image url here.
+    }
     const generateMeme = () =>{
         // console.log(form)
         let url=`https://api.imgflip.com/caption_image?template_id=${form.template_id}&username=${form.username}&password=${form.password}`;
@@ -26,6 +32,7 @@ function Meme({meme,setMeme,setUrl}) {
                     setError(null)
                     setMeme({...meme,url:result.data.url})
                     setUrl(result.data.url);
+                    setUri(result.data.url)
                 }
                 else 
                     setError(result.error_message)
@@ -49,9 +56,10 @@ function Meme({meme,setMeme,setUrl}) {
             }
             
         </div>
-        {error?<div className='err'>{error}</div>:null}
+        {error?<div className='err'>*{error}</div>:null}
         <button onClick={generateMeme}>Create MEME</button>      
-        <button >return to templates</button>
+        <button onClick={()=>setMeme(null)}>return to templates</button>
+        <button onClick={downloadImage}>Download</button>
         {/* <ShareIcon onClick={shareMeme}/> */}
     </div>
   )
