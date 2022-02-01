@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ShareIcon from '@mui/icons-material/Share';
+// import ShareIcon from '@mui/icons-material/Share';
 import '../App.css'
 function Meme({meme,setMeme,setUrl}) {
     const [error,setError]=useState(null)
@@ -9,13 +9,11 @@ function Meme({meme,setMeme,setUrl}) {
         password:"Qwerty@123",
         boxes:[],
     })
-    const shareMeme = () =>{
-
-    }
+    
     const generateMeme = () =>{
         // console.log(form)
         let url=`https://api.imgflip.com/caption_image?template_id=${form.template_id}&username=${form.username}&password=${form.password}`;
-            form.boxes.map(( box, index )=>{
+            form.boxes.map(( box, index ) => {
                 // console.log(`boxes[${index}][text]=${box.text}`)
                 url+=`&boxes[${index}][text]=${box.text}`;
             })
@@ -24,7 +22,7 @@ function Meme({meme,setMeme,setUrl}) {
             .then((res) => res.json())
             .then((result) => {
                 // console.log(res.data)
-                if(result.success==true){
+                if(result.success === true){
                     setError(null)
                     setMeme({...meme,url:result.data.url})
                     setUrl(result.data.url);
@@ -53,7 +51,7 @@ function Meme({meme,setMeme,setUrl}) {
         </div>
         {error?<div className='err'>{error}</div>:null}
         <button onClick={generateMeme}>Create MEME</button>      
-        <button onClick={()=>setMeme(null)}>return to templates</button>
+        <button >return to templates</button>
         {/* <ShareIcon onClick={shareMeme}/> */}
     </div>
   )

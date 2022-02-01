@@ -9,13 +9,13 @@ function Share({url}) {
             quote={"Checkout This MEME!!!"}
             hashtag='#React'
         >
-            <FacebookIcon logoFillColor='white' round={true} />
+            <FacebookIcon className='logo' logoFillColor='white' round={true} />
         </FacebookShareButton>
       <WhatsappShareButton 
         url={url}
         title="Checkout This MEME !!!"
       >
-        <WhatsappIcon logoFillColor='white' round={true} />   
+        <WhatsappIcon  className='logo' logoFillColor='white' round={true} />   
       </WhatsappShareButton>
       
     </>
